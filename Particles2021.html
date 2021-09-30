@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Test2</title>
+		<title>Particles2021</title>
 
-		<meta name="description" content="LAMMPS DEM UPDATE 15/10/2020">
+		<meta name="description" content="Modelling complex particles in DEM using spherical harmonics">
 		<meta name="author" content="James Young">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -208,6 +208,80 @@
 				  	</div>
 				</section>
 				<!--------------------------------->
+
+
+				<!--------------------------------->
+				<section>
+					<h1> Numerical Integration</h1>
+						<ol> 
+							<li class="fragment fade-in-then-semi-out " data-fragment-index="0">
+								Gauss-Legendre Trapezoidal Rule over sphere:
+								$I(f)=\int_0^{2\pi}\int_0^\pi f (\theta,\phi) \mathrm{d}\theta\mathrm{d}\phi = \int_0^{2\pi}\int_{-1}^1 \frac{f(\arccos(\zeta),\phi)}{\sin(\arccos{\zeta})} \mathrm{d} \zeta \mathrm{d}\phi$ 
+								$\quad\quad\approx \frac{\pi^2}{L+1}\sum_{j=0}^L\sum_{i=1}^m w_i  \frac{f(\arccos(\zeta_i),\phi_j)}{\sin(\arccos{\zeta_i})}$
+								<br> where $\phi_j=\frac{2\pi j}{L+1}$, $\zeta_i$ are the quadrature abscissae, and $w_i$ are the quadrature weights.
+							</li>
+							<li class="fragment fade-in-then-semi-out" data-fragment-index="1">
+								Gauss-Legendre Trapezoidal Rule over spherical cap (centred at north pole):
+								$I_L(f) = \frac{\pi(1-\cos(\gamma))}{L+1}\sum_{j=0}^L\sum_{i=1}^m w_i \frac{f(\xi_i,\phi_j)}{\sin(\xi_i)}$
+								<br>
+								where $\xi_i =\arccos(\frac{1-\cos(\gamma)}{2}\zeta_i+\frac{1+\cos(\gamma)}{2})$
+							</li>
+							<li class="fragment fade-in" data-fragment-index="2">
+								Can now solve vector area, force, moment, and volume integrals
+							</li>
+						</ol>
+				</section>
+				<!--------------------------------->
+
+
+				<!--------------------------------->
+				<section>
+					<h1> Difficulty with SH representation</h1>
+
+				</section>
+				<!--------------------------------->
+
+
+
+
+
+
+
+
+				<!--------------------------------->
+				<section style="text-align: left;">
+					<h1> Practical Implementations</h1>
+						<ol> 
+							<li class="fragment fade-in-then-semi-out " data-fragment-index="0">
+								Coefficient storage
+							</li>
+							<li class="fragment fade-in-then-semi-out " data-fragment-index="1">
+								Quaternions
+							</li>
+							<li class="fragment fade-in-then-semi-out " data-fragment-index="2">
+								Speed: order of expansion, degree of numerical integration scheme, and iteration solving tolerance
+							</li>
+							<li class="fragment fade-in-then-semi-out " data-fragment-index="3">
+								LAMMPS package
+							</li>
+						</ol>
+				</section>
+				<!--------------------------------->
+
+
+				<!--------------------------------->
+				<section data-background-image='graphics/uoelogo.png' data-background-repeat="no-repeat" data-background-position="2% 2%" data-background-size="30% auto" style="text-align: left;">
+					<h1> Thank for you listening</h1>
+					<p>
+					 james.young@ed.ac.uk 
+					 <br>
+					 https://github.com/younjames/lammps/tree/spherharm
+					 <br><br>
+					 Thanks to Rosario Capozza and Kevin Stratford
+					</p>
+				</section>
+				<!--------------------------------->
+
 
 
 			</div>
