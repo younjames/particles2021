@@ -279,7 +279,29 @@
 				<section style="text-align: center;">
 					<h1 style="text-align: center;"> Difficulty with SH representation: Solution</h1>
 
-					<p>Bisection method here</p>
+						<div class="r-stack">
+
+							<figure class="fragment current-visible" data-fragment-index="0">
+								<img class="plain" width="600" margin="0 auto" data-src="graphics/bisection/initial.svg">	
+								<figcaption>1. How to find point of intersection?</figcaption>					
+							</figure>
+
+							<figure class="fragment current-visible" data-fragment-index="1">
+								<img class="plain" width="600" data-src="graphics/bisection/middle.svg">	
+								<figcaption>2. Bisect radius, check if point inside or outside (outside)</figcaption>					
+							</figure>
+
+							<figure class="fragment current-visible" data-fragment-index="2">
+								<img class="plain" width="600" data-src="graphics/bisection/second.svg">	
+								<figcaption>3. Bisect remaining line segment depending on previous inside/outside</figcaption>					
+							</figure>
+
+							<figure class="fragment current-visible" data-fragment-index="3">
+								<img class="plain" width="600" data-src="graphics/bisection/third.svg">	
+								<figcaption>4. Continue until change in bisection point position < tolerance</figcaption>					
+							</figure>
+
+					</div>
 
 				</section>
 				<!--------------------------------->
@@ -343,7 +365,7 @@
 								Quaternions
 							</li>
 							<li class="fragment fade-in-then-semi-out " data-fragment-index="2">
-								Speed: order of expansion, degree of numerical integration scheme, and iteration solving tolerance
+								Speed: order of expansion, degree of numerical integration scheme, bisection efficiency, and iteration solving tolerance
 							</li>
 							<li class="fragment fade-in-then-semi-out " data-fragment-index="3">
 								LAMMPS package
