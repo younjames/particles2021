@@ -197,6 +197,9 @@
 								  $\mathbf{M}_n = -\int_{A_1} w'(V_c)\mathbf{u}\times\mathbf{n}_s\mathrm{d} A$ $\quad\quad\;\;= \int_{A_2} w'(V_c)\mathbf{u}\times\mathbf{n}_s\mathrm{d} A$
 								</li>
 								<li class="fragment fade-in-then-semi-out " data-fragment-index="5">
+									$\mathbf{M}_2 = \mathbf{F}_1 \times (\mathbf{x}_c - \mathbf{x}_2)$
+								</li>
+								<li class="fragment fade-in-then-semi-out " data-fragment-index="6">
 								  $V_c = $ $\frac{1}{3}\int_0^{2\pi}\int_0^{\gamma_n} \left[r_{n,\mathrm{O}}^3(\theta_n,\phi_n) - r_{n,\mathrm{I}}^3(\theta_n,\phi_n)\right]\sin(\theta_n) \mathrm{d}\theta_n\mathrm{d}\phi_n$ for  $r_{n,\mathrm{O}}(\theta_n,\phi_n) > r_{n,\mathrm{I}}(\theta_n,\phi_n)$
 								</li>
 							</ul>
@@ -234,17 +237,98 @@
 				<!--------------------------------->
 
 
+
 				<!--------------------------------->
-				<section>
-					<h1> Difficulty with SH representation</h1>
+				<section style="text-align: center;">
+					<h1 style="text-align: center;"> Difficulty with SH representation</h1>
+
+					<div class="r-stack">
+
+							<figure class="fragment current-visible" data-fragment-index="0">
+								<img class="plain" width="600" margin="0 auto" data-src="graphics/repprobs/sphere.svg">	
+								<figcaption>1. Bounding sphere from maximum radius of each particle for all $N=0,1...N_{\mathrm{max}}$</figcaption>					
+							</figure>
+
+							<figure class="fragment current-visible" data-fragment-index="1">
+								<img class="plain" width="600" data-src="graphics/repprobs/disc.svg">	
+								<figcaption>2. Discretise a spherical cap using quadrature abscissae</figcaption>					
+							</figure>
+
+							<figure class="fragment current-visible" data-fragment-index="2">
+								<img class="plain" width="600" data-src="graphics/repprobs/quad1.svg">	
+								<figcaption>3. Intersection of quadrature point with surface, project onto neighbour surface (no contact)</figcaption>					
+							</figure>
+
+							<figure class="fragment current-visible" data-fragment-index="3">
+								<img class="plain" width="600" data-src="graphics/repprobs/quad2.svg">	
+								<figcaption>4. Intersection of quadrature point with surface, project onto neighbour surface (contact)</figcaption>					
+							</figure>
+
+							<figure class="fragment current-visible" data-fragment-index="4">
+								<img class="plain" width="600" data-src="graphics/repprobs/question.svg">	
+								<figcaption>5. Quadrature scheme requires intersection with quadrature point, neighbour surface defined from COM, how to find intersection?</figcaption>					
+							</figure>
+					</div>
 
 				</section>
 				<!--------------------------------->
 
 
 
+								<!--------------------------------->
+				<section style="text-align: center;">
+					<h1 style="text-align: center;"> Difficulty with SH representation: Solution</h1>
+
+					<p>Bisection method here</p>
+
+				</section>
+				<!--------------------------------->
 
 
+
+				<!-- Numerical Example -->
+				<!--------------------------------->
+				<section>
+					<h1>Example: Particle-particle collision </h1>
+					<video width="60%" data-autoplay loop>
+					    <source data-src="graphics/example/example.webm" type="video/webm" />
+					 </video>
+  					<!-- <iframe data-src="graphics/example/example.mp4"></iframe> -->
+				</section>
+				<!--------------------------------->
+
+
+				<!-- Numerical Example -->
+				<!--------------------------------->
+				<section>
+					<h1>Example: Particle-particle collision</h1>
+					<div style="display:flex; display: inline-block;">	
+						<img class="plain" width="45%" data-src="graphics/example/ppt0.png">	
+						<img class="plain" width="45%" data-src="graphics/example/ppt1.png">	
+					</div>
+					<div style="display:flex; display: inline-block;"> 
+						<figure>
+						<img class="plain" width="45%" data-src="graphics/example/ppt2.png">	
+						<img class="plain" width="45%" data-src="graphics/example/ppt3.png">
+						<figcaption>Before impact, maximum impact, maximum impact cross-section, post-impact</figcaption>
+						</figure>	
+					</div>
+				</section>
+				<!--------------------------------->
+
+
+				<!-- Numerical Example -->
+				<!--------------------------------->
+				<section>
+					<h1>Example: Particle-particle collision</h1>
+					<div style="display:flex; display: inline-block;"> 
+						<figure>
+						<img class="plain" width="65%" data-src="graphics/example/energyvstime.svg">	
+						<figcaption>Verification: Normalised energy vs normalised time</figcaption>
+						</figure>	
+					</div>
+				</section>
+				<!--------------------------------->
 
 
 
@@ -279,6 +363,13 @@
 					 <br><br>
 					 Thanks to Rosario Capozza and Kevin Stratford
 					</p>
+				</section>
+				<!--------------------------------->
+
+
+				<!--------------------------------->
+				<section>
+					<h1>References</h1>
 				</section>
 				<!--------------------------------->
 
