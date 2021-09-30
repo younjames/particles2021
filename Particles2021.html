@@ -221,7 +221,7 @@
 								Gauss-Legendre Trapezoidal Rule over sphere:
 								$I(f)=\int_0^{2\pi}\int_0^\pi f (\theta,\phi) \mathrm{d}\theta\mathrm{d}\phi = \int_0^{2\pi}\int_{-1}^1 \frac{f(\arccos(\zeta),\phi)}{\sin(\arccos{\zeta})} \mathrm{d} \zeta \mathrm{d}\phi$ 
 								$\quad\quad\approx \frac{\pi^2}{L+1}\sum_{j=0}^L\sum_{i=1}^m w_i  \frac{f(\arccos(\zeta_i),\phi_j)}{\sin(\arccos{\zeta_i})}$
-								<br> where $\phi_j=\frac{2\pi j}{L+1}$, $\zeta_i$ are the quadrature abscissae, and $w_i$ are the quadrature weights.
+								<br> where $\phi_j=\frac{2\pi j}{L+1}$, $\zeta_i$ are the quadrature abscissae, and $w_i$ are the quadrature weights
 							</li>
 							<li class="fragment fade-in-then-semi-out" data-fragment-index="1">
 								Gauss-Legendre Trapezoidal Rule over spherical cap (centred at north pole):
@@ -315,6 +315,7 @@
 					<video width="60%" data-autoplay loop>
 					    <source data-src="graphics/example/example.webm" type="video/webm" />
 					 </video>
+					 <figcaption>Note: Surface point for visualisation only (i.e. not quadrature points)</figcaption>
   					<!-- <iframe data-src="graphics/example/example.mp4"></iframe> -->
 				</section>
 				<!--------------------------------->
@@ -369,6 +370,10 @@
 							</li>
 							<li class="fragment fade-in-then-semi-out " data-fragment-index="3">
 								LAMMPS package
+								<ul>
+								<li> Nearest neighbour searching (MPI) </li>
+								<li> Modified NVE time integration, new atom style, pair style, wall interaction, and math (quadrature, legendre, quaternion, contact)</li>
+								</ul>
 							</li>
 						</ol>
 				</section>
