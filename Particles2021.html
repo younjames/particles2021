@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Test2</title>
+
+		<meta name="description" content="LAMMPS DEM UPDATE 15/10/2020">
+		<meta name="author" content="James Young">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<!-- <link rel="stylesheet" href="dist/theme/white.css" id="theme"> -->
+		<link rel="stylesheet" href="sysart.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/zenburn.css" id="highlight-theme">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<!-- TITLE SLIDE -->
+				<!--------------------------------->
+				<!-- <section data-state="title"> -->
+				<section data-background-image='graphics/uoelogo.png' data-background-repeat="no-repeat" data-background-position="2% 2%" data-background-size="30% auto">
+					<h1>Modelling complex particles in DEM using spherical harmonics</h1>
+					<p>
+						James Young, Kevin J. Hanley <br>
+						james.young@ed.ac.uk
+					</p>
+					<p>
+						<small>
+							Research funded by the UK Engineering and Physical Sciences Research Council (EPSRC) grant EP/R005877/1
+						</small>
+					</p>
+				</section>
+				<!--------------------------------->
+
+				<!-- Why Shape Matters -->
+				<!--------------------------------->
+				<section>
+					<h1>Why shape matters</h1>
+					<figure class="fragment" data-fragment-index="1">
+						<img class="plain" width="300" src="graphics/shapematters/height.png">	
+						<figcaption>Height of bed vs shape [1]</figcaption>					
+					</figure>
+					<figure class="fragment" data-fragment-index="1">
+						<img class="plain" width="300" src="graphics/shapematters/porosity.png">	
+						<figcaption>Porosity of bed vs shape [1]</figcaption>					
+					</figure>
+					<figure class="fragment" data-fragment-index="2">
+						<img class="plain" width="300" src="graphics/shapematters/pilingangleofrepose.png">	
+						<figcaption>Angle of respose vs sphericity [2]</figcaption>					
+					</figure>
+
+					<figure class="fragment" data-fragment-index="3">
+						<img class="plain" width="401" src="graphics/shapematters/segregation1.png">	
+						<figcaption>Rotating drum binary mixture distribution #1 [3]</figcaption>					
+					</figure>
+					<figure class="fragment" data-fragment-index="3">
+						<img class="plain" width="400" src="graphics/shapematters/segregation2.png">	
+						<figcaption>Rotating drum binary mixture distribution #2 [3]</figcaption>					
+					</figure>
+				</section>
+				<!--------------------------------->
+
+
+				<!-- Current Approaches -->
+				<!--------------------------------->
+				<section> 
+					<h1>Current Approaches</h1>
+				    <ul>
+				      <li>Single-particle methods: spheres, ellipsoids, superquadratics, polyhedra</li>
+				      <li>Multi-sphere method</li>
+				      <li>Non-uniform rational B-splines, potential particles, spheropolyhedrons, LS-DEM</li>
+				    </ul>
+				</section>
+				<!--------------------------------->
+
+				<!-- Spherical Harmonics -->
+				<!--------------------------------->
+				<section> 
+					<h1>Spherical Harmonics</h1>
+					<ul> 
+						<li class="fragment fade-in-then-semi-out " data-fragment-index="1">
+							Any smooth function defined on a unit sphere $(0\le\theta\le\pi, 0\le\phi\le 2\pi)$ $r(\theta,\phi) = \sum_{n=0}^\infty\sum_{m=-n}^{n}a_{nm}Y_n^m(\theta,\phi)$
+						</li>
+						<li class="fragment fade-in-then-semi-out " data-fragment-index="2">
+							The spherical harmonic function
+							$Y_n^m(\theta,\phi) = \displaystyle\sqrt{\frac{(2n+1)(n-m)!}{4\pi(n+m)!}}P_n^m(cos(\theta)e^{im\phi}) $
+						</li>
+						<li class="fragment fade-in-then-semi-out " data-fragment-index="3">
+							Approximate summations with $r(\theta,\phi) \approx \sum_{n=0}^{\color{#041e42}{N=20}}...$
+						</li>
+						<li class="fragment fade-in-then-semi-out " data-fragment-index="4">
+							$a_{nm}$ contains $(N+1)^2 =  441$ complex numbers
+						</li>
+						<li class="fragment fade-in-then-semi-out " data-fragment-index="5">
+							Dr Garboczi's Particle-shape-database [4]
+						</li>
+						<!-- ftp.nist.gov/pub/bfrl/garbocz/Particle-shape-database/MA111-7/. -->
+					</ul>
+				</section>
+				<!--------------------------------->
+
+				<!--------------------------------->
+				<section>
+					<h1>Spherical Harmonics</h1>
+					<figure>
+						<img class="plain" src = "graphics/spherharm_reps.jpg" alt = "Spherical Harmonic representation from 0 to 100" width = "70%" style="margin-left:auto; margin-right:auto">	
+						<figcaption> Arbitrary particle representation from $N=0$ to $N=100.$ [5]</figcaption>					
+					</figure>
+
+				</section>
+				<!--------------------------------->
+
+				<!--------------------------------->
+				<section>
+					<h1> SH - Contact Method</h1>
+						<ol> 
+							<li class="fragment fade-in-then-semi-out " data-fragment-index="0">
+								Hierarchical contact [5]: sphere-sphere overlap
+							</li>
+							<li class="fragment fade-in" data-fragment-index="1">
+								Feng's volume-based energy-conserving contact model [6]
+								<ul>
+									<li class="fragment fade-in-then-semi-out " data-fragment-index="2">
+										Numerical integration over spherical caps using Gauss-Legendre quadrature
+									</li>
+									<li class="fragment fade-in-then-semi-out " data-fragment-index="2">
+										Iteratively solving for intersection using a bisection method
+									</li>
+								</ul>
+							</li>
+
+						</ol>
+				</section>
+				<!--------------------------------->
+
+				<!--------------------------------->
+				<section>
+					<h1> Hierarchical contact</h1>
+
+					<div class="r-stack">
+						<div class="fragment fade-out" data-fragment-index="3">
+							<figure class="fragment fragment fade-in-then-semi-out" data-fragment-index="1">
+								<img class="plain" width="400" src="graphics/sh_contact1.svg">	
+								<!-- <figcaption>Height of bed vs shape [1]</figcaption>					 -->
+							</figure>
+							<figure class="fragment fade-in-then-semi-out" data-fragment-index="1">
+								<img class="plain" width="400" src="graphics/sh_contact2.svg">	
+								<!-- <figcaption>Porosity of bed vs shape [1]</figcaption>					 -->
+							</figure>
+							<p class="fragment fade-in-then-out" data-fragment-index="2">
+								$S_p = \prod _{m=1}^{N-p} \lambda_{N-m} \quad \mathrm{for} \quad 0\le p \le N-1$
+								<br><br>
+								$\lambda_p = r_{\mathrm{max},p+1}/r_{\mathrm{max},p}$
+							</p>
+						</div>
+							<figure class="fragment" data-fragment-index="3">
+								<img class="plain" width="700" src="graphics/sh_expfacts.svg">	
+								<!-- <figcaption>Height of bed vs shape [1]</figcaption>					 -->
+							</figure>
+					</div>
+
+
+				</section>
+				<!--------------------------------->
+
+
+				<!--------------------------------->
+				<section>
+					<h1> SH - Contact Model </h1>
+				  	<div class="twocolumn">
+				    	<div>
+							<ul> 
+								<li class="fragment fade-in-then-semi-out " data-fragment-index="0">
+								Feng's volume-based energy-conserving contact model [6]
+								$\mathbf{F}_n = -\nabla_x w(V_c) = -w'(V_c)\mathbf{A}_n$, with $w'(V_c) = m k_n V_c^{m-1}$ 
+								</li>
+								<li class="fragment fade-in-then-semi-out " data-fragment-index="3">
+								  $\mathbf{A}_n = \int_{A_1} \mathrm{d}\mathbf{A} = -\int_{A_2} \mathrm{d}\mathbf{A}$
+								</li>
+								<li class="fragment fade-in-then-semi-out " data-fragment-index="4">
+								  $\mathbf{M}_n = -\int_{A_1} w'(V_c)\mathbf{u}\times\mathbf{n}_s\mathrm{d} A$ $\quad\quad\;\;= \int_{A_2} w'(V_c)\mathbf{u}\times\mathbf{n}_s\mathrm{d} A$
+								</li>
+								<li class="fragment fade-in-then-semi-out " data-fragment-index="5">
+								  $V_c = $ $\frac{1}{3}\int_0^{2\pi}\int_0^{\gamma_n} \left[r_{n,\mathrm{O}}^3(\theta_n,\phi_n) - r_{n,\mathrm{I}}^3(\theta_n,\phi_n)\right]\sin(\theta_n) \mathrm{d}\theta_n\mathrm{d}\phi_n$ for  $r_{n,\mathrm{O}}(\theta_n,\phi_n) > r_{n,\mathrm{I}}(\theta_n,\phi_n)$
+								</li>
+							</ul>
+				    	</div>
+						<div class="r-stack" style="float:right">
+							<img class="plain fragment fade-in-then-semi-out" data-fragment-index="1" src="graphics/cmodel1.png" width="400">
+					 		<img class="plain fragment fade-in-then-semi-out" data-fragment-index="2" src="graphics/cmodel2.png" width="400">
+						</div>	
+				  	</div>
+				</section>
+				<!--------------------------------->
+
+
+			</div>
+
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>	
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				math: {
+			      mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+			      config: 'TeX-AMS_HTML-full',
+			      // pass other options into `MathJax.Hub.Config()`
+			      TeX: { Macros: { RR: "{\\bf R}" } }
+			    },
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath ]
+			});
+
+		</script>
+
+	</body>
+</html>
