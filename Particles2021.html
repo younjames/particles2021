@@ -131,15 +131,18 @@
 					<h1> SH - Contact Method</h1>
 						<ol> 
 							<li class="fragment fade-in-then-semi-out " data-fragment-index="0">
-								Hierarchical contact [5]: sphere-sphere overlap
+								Neighbour searching sphere-sphere overlap
 							</li>
-							<li class="fragment fade-in" data-fragment-index="1">
+							<li class="fragment fade-in-then-semi-out " data-fragment-index="1">
+								Hierarchical contact [5]
+							</li>
+							<li class="fragment fade-in" data-fragment-index="2">
 								Feng's volume-based energy-conserving contact model [6]
 								<ul>
-									<li class="fragment fade-in-then-semi-out " data-fragment-index="2">
+									<li class="fragment fade-in-then-semi-out " data-fragment-index="3">
 										Numerical integration over spherical caps using Gauss-Legendre quadrature
 									</li>
-									<li class="fragment fade-in-then-semi-out " data-fragment-index="2">
+									<li class="fragment fade-in-then-semi-out " data-fragment-index="3">
 										Iteratively solving for intersection using a bisection method
 									</li>
 								</ul>
@@ -149,20 +152,41 @@
 				</section>
 				<!--------------------------------->
 
+
+				<!--------------------------------->
+				<section>
+					<h1> Neighbour searching: sphere sphere</h1>
+
+						<figure class="fragment fragment fade-in-then-semi-out" data-fragment-index="1">
+							<img class="plain" width="400" src="graphics/sh_contact1.svg">	
+							<!-- <figcaption>Height of bed vs shape [1]</figcaption>					 -->
+						</figure>
+						<figure class="fragment fade-in-then-semi-out" data-fragment-index="1">
+							<img class="plain" width="400" src="graphics/sh_contact2.svg">	
+							<!-- <figcaption>Porosity of bed vs shape [1]</figcaption>					 -->
+						</figure>
+
+				</section>
+				<!--------------------------------->
+
+
 				<!--------------------------------->
 				<section>
 					<h1> Hierarchical contact</h1>
 
-					<div class="r-stack">
+						<p>
+							$S_p = \prod _{m=1}^{N-p} \lambda_{N-m} \quad \mathrm{for} \quad 0\le p \le N-1$
+							<br><br>
+							$\lambda_p = r_{\mathrm{max},p+1}/r_{\mathrm{max},p}$
+						</p>
+						<figure class="fragment" data-fragment-index="3">
+							<img class="plain" width="700" src="graphics/sh_expfacts.svg">	
+							<!-- <figcaption>Height of bed vs shape [1]</figcaption>					 -->
+						</figure>
+
+
+<!-- 					<div class="r-stack">
 						<div class="fragment fade-out" data-fragment-index="3">
-							<figure class="fragment fragment fade-in-then-semi-out" data-fragment-index="1">
-								<img class="plain" width="400" src="graphics/sh_contact1.svg">	
-								<!-- <figcaption>Height of bed vs shape [1]</figcaption>					 -->
-							</figure>
-							<figure class="fragment fade-in-then-semi-out" data-fragment-index="1">
-								<img class="plain" width="400" src="graphics/sh_contact2.svg">	
-								<!-- <figcaption>Porosity of bed vs shape [1]</figcaption>					 -->
-							</figure>
 							<p class="fragment fade-in-then-out" data-fragment-index="2">
 								$S_p = \prod _{m=1}^{N-p} \lambda_{N-m} \quad \mathrm{for} \quad 0\le p \le N-1$
 								<br><br>
@@ -171,10 +195,10 @@
 						</div>
 							<figure class="fragment" data-fragment-index="3">
 								<img class="plain" width="700" src="graphics/sh_expfacts.svg">	
-								<!-- <figcaption>Height of bed vs shape [1]</figcaption>					 -->
+								<figcaption>Height of bed vs shape [1]</figcaption>					
 							</figure>
 					</div>
-
+ -->
 
 				</section>
 				<!--------------------------------->
